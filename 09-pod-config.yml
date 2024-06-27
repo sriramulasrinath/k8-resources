@@ -6,16 +6,20 @@ spec:
   containers:
   - name: nginx 
     image: nginx 
-    env: 
-    - name: course 
-      valueFrom:
-        configMapKeyRef:
-          name: k8s-info
-          key: course 
-    - name: trainer  
-      valueFrom:
-        configMapKeyRef:
-          name: k8s-info
-          key: trainer  
+    envFrom:
+    - configMapRef:
+        name: k8s-info
+
+    # env: 
+    # - name: course 
+    #   valueFrom:
+    #     configMapKeyRef:
+    #       name: k8s-info
+    #       key: course 
+    # - name: trainer  
+    #   valueFrom:
+    #     configMapKeyRef:
+    #       name: k8s-info
+    #       key: trainer  
 
 
