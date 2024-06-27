@@ -1,7 +1,7 @@
-appVersion: v1 
-kind: Pod 
+kind: Pod
+apiVersion: v1 
 metadata:
-  name: labels 
+  name: labels-demo 
   labels:
     name: srinath
     learing: DevOps
