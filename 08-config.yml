@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap 
 metadata: 
   name: k8s-info 
-  data: 
-    course: "DevOps with AWS"
-    trainer: "sivakumar"
-    github: "https://github.com/daws-78s/k8-resources"
+data: 
+  course: "DevOps with AWS"
+  trainer: "sivakumar"
+  github: "https://github.com/daws-78s/k8-resources"
