@@ -1,0 +1,8 @@
+apiVersion: v1 
+kind: Pod 
+metadata: 
+  name: k8s-info 
+data: 
+  course: "DevOps with AWS"
+  trainer: "sivakumar"
+  github: "https://github.com/daws-78s/k8-resources"
