@@ -7,7 +7,7 @@ spec:
   - name: nginx
     image: nginx 
     env: 
-    - name: srinath
-      learing: DevOps
     - name: course
-      value: 'kubernetes' 
+      value: 'kubernetes'
+    - name: duration
+      value: '20hours' 
