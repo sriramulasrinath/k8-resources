@@ -1,0 +1,11 @@
+appVersion: v1 
+kind: Pod 
+metadata:
+  name: labels 
+  labels:
+    name: srinath
+    learing: DevOps
+spec:
+  containers:
+  - name: nginx
+    image: nginx
