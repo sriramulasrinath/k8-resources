@@ -1,56 +1,55 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ebs-static
+  name: efs-static
 spec:
   capacity:
-    storage: 100Gi
+    storage: 5Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
-  csi: 
-    driver: ebs.csi.aws.com
-    fsType: ext4
-    volumeHandle: "vol-sdsadw" #change your volume id
-
+  storageClassName: ""
+  persistentVolumeReclaimPolicy: Retain
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: "v....." #replace with your volume id 
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-static
-spec:
-  storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
+  name: efs-static-claim
   volumeName: ebs-static
+labels:
+  purpose: ebs-static
+  project: expense
+spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: ""
   resources:
     requests:
-      storage: 5Gi
+      storage: 2Gi
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-static
-  labels:
-    purpose: ebs-static
-    project: expense
+  name: efs-static
 spec:
   containers:
-  - name: nginx
+  - name: app
     image: nginx
-    volumeMounts: #claiming
-    - name: ebs-static
+    volumeMounts:
+    - name: persistent-storage
       mountPath: /usr/share/nginx/html
-  nodeSelector:
-    topology.kubernetes.io/zone: us-east-1c #mention which availability zones using ur nodes
-  volumes: #adding to the pods
+  volumes:
   - name: persistent-storage
     persistentVolumeClaim:
-      claimName: ebs-static
+      claimName: efs-static-claim
 ---
 apiVersion: v1 
 kind: Service 
 metadata:
-  name: nginx-lb
+  name: efs-static
 spec:
   type: LoadBalancer
   selector:
